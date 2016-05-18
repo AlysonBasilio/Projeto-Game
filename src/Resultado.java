@@ -18,7 +18,7 @@ public class Resultado {
     			resultado=3;
     		else if(p2==2)
     			resultado=2;
-    		else
+    		else if(p2==3)
     			resultado=1;
     	}
     	else if(p1 == 2){
@@ -26,7 +26,7 @@ public class Resultado {
     			resultado=3;
     		else if(p2==3)
     			resultado=2;
-    		else
+    		else if(p2==1)
     			resultado=1;
     	}
     	else if(p1 == 3){
@@ -34,7 +34,7 @@ public class Resultado {
     			resultado=3;
     		else if(p2==1)
     			resultado=2;
-    		else
+    		else if(p2==2)
     			resultado=1;
     	}
 		return resultado;

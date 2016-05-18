@@ -1,3 +1,5 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.ServerSocket;
@@ -8,26 +10,29 @@ import java.util.Scanner;
 public class ServerGame implements Runnable{
 	private int ID;
 	private Resultado resultado;
-	PrintStream saida;
-	Scanner scanner;
+	DataInputStream in;
+	DataOutputStream out;
 	
 	public ServerGame(Socket accept, Resultado r, int id) throws IOException {
 		resultado = r;
 		ID=id;		
-		saida = new PrintStream(accept.getOutputStream());
-		scanner = new Scanner(accept.getInputStream());
+		in = new DataInputStream(accept.getInputStream());
+		out = new DataOutputStream(accept.getOutputStream());
 	}
 
 	public void run(){
-		int valor = Integer.parseInt(scanner.nextLine());
-		while(valor==0)
-			valor = Integer.parseInt(scanner.nextLine());
-		System.out.println("O Player "+ID+" jogou "+valor);
-		resultado.setP(valor, ID);
-		while (resultado.getResultado()==0){}
-		saida.println(resultado.getResultado());
-		saida.close();
-		scanner.close();
+		try {
+			int valor = in.readInt();
+			System.out.println("O Player "+ID+" jogou "+valor);
+			resultado.setP(valor, ID);
+			while (resultado.getResultado()==0){}
+			out.writeInt(resultado.getResultado());
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String args[]) throws IOException{

@@ -6,7 +6,7 @@ public class JoKenPo {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		window mainWindow = new window();
+		Window mainWindow = new Window();
 		
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.getContentPane().setBackground(Color.BLACK);
